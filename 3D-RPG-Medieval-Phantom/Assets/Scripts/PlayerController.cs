@@ -22,10 +22,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("CLICKED");
+            Debug.Log("CLICKED: 0");
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit , 100, movementMask))
+            if (Physics.Raycast(ray, out hit , 100))
             {
                 //Move out player to what we hit
                 motor.MoveToPoint(hit.point);
@@ -35,19 +35,20 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("CLICKED");
+            Debug.Log("CLICKED: 1");
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit , 100, movementMask))
+            if (Physics.Raycast(ray, out hit , 100))
             {
+                Debug.Log("We selected something" + hit.collider.name.ToString());
                 //Check if we hit an interactabçe
                 InteractbleObject interactable =  hit.collider.GetComponent<InteractbleObject>();
                 if (interactable != null)
                 {
+                    //If we did, set it to as our focus
+                    Debug.Log("Setting FOCUS");
                     SetFocus(interactable);
                 }
-                //If we did, set it to as our focus
-
             }
         }
     }
